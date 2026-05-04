@@ -6,7 +6,7 @@ import visitors.CanvasVisitor
 abstract class Figure(
     val origin: Coordinate,
     val color: Color,
-    val placeHolder: Char,) {
+    val placeHolder: String,) {
 
     abstract fun accept(visitor: CanvasVisitor)
 }

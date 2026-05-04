@@ -1,66 +1,30 @@
 package visitors
 import Canvas
 import figures.*
-import Cell
-import IO.Color
-import Coordinate
 
 class DefaultRender(): CanvasVisitor {
-    /*private*/ val grid: ArrayList<ArrayList<Cell>> = ArrayList()
+    private var _grid: ArrayList<ArrayList<String>> = ArrayList()
+
+    val grid: List<List<String>>
+    get() = _grid
+
 
     override fun visit(canvas: Canvas) {
-        createBlankGrid(canvas.width.toInt(), canvas.height.toInt(), grid)
+
+        _grid = RenderLogic.createBlankGrid(canvas.width.toInt(), canvas.height.toInt())
     }
 
     override fun visit(rectangle: Rectangle) {
-        drawRectangleOnGrid(rectangle, grid)
+        RenderLogic.drawRectangleOnGrid(rectangle, _grid) {it.placeHolder}
     }
 
     override fun visit(triangle: Triangle) {
-        TODO("Not yet implemented")
+        RenderLogic.drawTriangleOnGrid(triangle, _grid) {it.placeHolder}
     }
 
     override fun visit(circle: Circle) {
-        TODO("Not yet implemented")
+        RenderLogic.drawCircleOnGrid(circle, _grid) {it.placeHolder}
     }
 
-    private fun createBlankGrid(
-        width: Int,
-        height: Int,
-        grid: ArrayList<ArrayList<Cell>>) {
 
-        for (i in 0..<height) {
-            val currentArray: ArrayList<Cell> = ArrayList()
-            for (cell in 0..<width) {
-                currentArray.add(Cell(' ', Color.DEFAULT))
-            }
-            grid.add(currentArray)
-        }
-    }
-
-    private fun drawRectangleOnGrid(rectangle: Rectangle, grid: ArrayList<ArrayList<Cell>>) {
-        if (rectangle.height == 0u || rectangle.width == 0u) { return }
-        val origin = rectangle.origin
-
-        for (line in origin.y..<origin.y + rectangle.height.toInt()) {
-
-            for (cell in origin.x..<origin.x + rectangle.width.toInt()) {
-
-                val cellCoordinate = Coordinate(cell, line)
-                val newCell = Cell(rectangle.placeHolder, rectangle.color)
-                tryToChangeCell(cellCoordinate, newCell, grid)
-            }
-        }
-    }
-
-    private fun tryToChangeCell(
-        cellCoordinate: Coordinate,
-        newCell: Cell,
-        grid: ArrayList<ArrayList<Cell>>) {
-        try {
-            grid[cellCoordinate.y][cellCoordinate.x] = newCell
-        } catch (e: Exception){
-            return
-        }
-    }
 }

@@ -7,7 +7,7 @@ import figures.Circle
 class AddNewCircle(
     val canvas: Canvas,
     val height: UInt,
-    val placeholder: Char,
+    val placeholder: String,
     val origin: Coordinate = Coordinate(0, 0),
     val color: Color = Color.DEFAULT,): Command {
 

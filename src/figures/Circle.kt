@@ -6,7 +6,7 @@ import visitors.CanvasVisitor
 class Circle private constructor(
     val height: UInt,
     origin: Coordinate,
-    placeholder: Char,
+    placeholder: String,
     color: Color,
     ): Figure(origin, color, placeholder) {
 
@@ -17,7 +17,7 @@ class Circle private constructor(
     companion object {
         fun fromHeight(
             height: UInt,
-            placeholder: Char,
+            placeholder: String,
             origin: Coordinate = Coordinate(0,0),
             color: Color = Color.DEFAULT): Circle {
 

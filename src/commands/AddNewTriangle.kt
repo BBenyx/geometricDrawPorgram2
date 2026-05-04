@@ -7,7 +7,7 @@ import figures.Triangle
 class AddNewTriangle(
     val canvas: Canvas,
     val points: List<Coordinate>,
-    val placeholder: Char,
+    val placeholder: String,
     val color: Color = Color.DEFAULT,): Command {
 
     override fun execute() {

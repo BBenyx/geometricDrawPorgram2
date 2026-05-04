@@ -1,31 +1,41 @@
 package IO
 
-import visitors.CanvasVisitor
+import Canvas
+import visitors.*
 
-class  OutputHandler(private var renderType: CanvasVisitor) {
+class  OutputHandler {
 
-    fun setRenderType(renderType: CanvasVisitor) {
-        this.renderType = renderType
+    fun printCanvas(canvas: Canvas, type: DefaultRender) {
+        canvas.accept(type)
+        val grid = type.grid
+        print2DGrid(grid)
     }
 
-    /*TODO*/
+    fun printCanvas(canvas: Canvas, type: ColorRender) {
+        canvas.accept(type)
+        val grid = type.grid
+        print2DGrid(grid)
+    }
 
+    fun printCanvas(canvas: Canvas, type: ListRender) {
+        canvas.accept(type)
+        val grid = type.grid
 
-
-    fun <T> applyColor(element: T, color: Color): String {
-        return when (color) {
-            Color.RED -> element.toString().red()
-            Color.GREEN -> element.toString().green()
-            Color.YELLOW -> element.toString().yellow()
-            Color.BLUE -> element.toString().blue()
-            Color.WHITE -> element.toString().white()
-            Color.DEFAULT -> element.toString()
+        for (subGrind in grid) {
+            print2DGrid(subGrind)
         }
     }
 
-    fun String.red() = "\u001B[31m$this\u001B[0m"
-    fun String.green() = "\u001B[32m$this\u001B[0m"
-    fun String.yellow() = "\u001B[33m$this\u001B[0m"
-    fun String.blue() = "\u001B[34m$this\u001B[0m"
-    fun String.white() = "\u001B[37m$this\u001B[0m"
+    fun printMessage(message: String) {
+        println(message)
+    }
+
+    private fun print2DGrid(grid: List<List<String>>) {
+        for (row in grid) {
+            for (elem in row) {
+                print(elem)
+            }
+            println()
+        }
+    }
 }

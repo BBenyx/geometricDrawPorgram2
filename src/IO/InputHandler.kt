@@ -1,7 +1,14 @@
 package IO
 import Coordinate
+import IO.Color
 
 class InputHandler {
+
+    fun stringInput(message: String): String {
+        println(message)
+        return readln().trim()
+    }
+
     fun intInput(message: String): Int {
 
         println(message)
@@ -29,14 +36,16 @@ class InputHandler {
         println(message)
         var coordinates: List<String> = readln().trim().split(",")
         while (
-            coordinates.size != 2 ||
-            tryToParseIntoInt(coordinates[0].trim()) != null ||
+            coordinates.size != 2 &&
+            tryToParseIntoInt(coordinates[0].trim()) != null &&
             tryToParseIntoInt(coordinates[1].trim()) != null) {
 
+            println(coordinates[0])
+            println(coordinates[1])
             println("ERROR: Input is not a coordinate! $message")
             coordinates = readln().trim().split(",")
         }
-        return Coordinate(coordinates[0].toInt(), coordinates[1].toInt())
+        return Coordinate(coordinates[0].trim().toInt(), coordinates[1].trim().toInt())
     }
 
     private fun tryToParseIntoInt(element: String): Int? {

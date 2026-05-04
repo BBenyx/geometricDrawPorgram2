@@ -7,9 +7,14 @@ class Triangle private constructor(
     val p1: Coordinate,
     val p2: Coordinate,
     val p3: Coordinate,
-    placeholder: Char,
+    placeholder: String,
     color: Color,
-    ): Figure(Coordinate(0,0) /*TODO real origin will be needed*/, color, placeholder) {
+    ): Figure(
+    Coordinate(
+        minOf(p1.x, p2.x, p3.x),
+        minOf(p1.y, p2.y, p3.y)),
+    color,
+    placeholder) {
 
     override fun accept(visitor: CanvasVisitor) {
         visitor.visit(this)
@@ -18,7 +23,7 @@ class Triangle private constructor(
     companion object {
         fun fromPoints(
             points: List<Coordinate>,
-            placeholder: Char,
+            placeholder: String,
             color: Color = Color.DEFAULT): Triangle {
 
             require(points.size == 3) {"Triangle can only be created with 3 points!"}

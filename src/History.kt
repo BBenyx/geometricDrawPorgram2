@@ -8,4 +8,9 @@ class History(private val commands: ArrayList<Command> = ArrayList()) {
         if (commands.isEmpty()) return null
         return commands.removeAt(0)
     }
+
+    fun peak(): Command? {
+        if (commands.isEmpty()) return null
+        return commands[0]
+    }
 }

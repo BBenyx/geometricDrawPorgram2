@@ -1,5 +1,6 @@
 package visitors
 import Canvas
+import IO.Color
 import figures.*
 import figures.Rectangle
 

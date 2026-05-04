@@ -7,7 +7,7 @@ class Rectangle private constructor(
     val height: UInt,
     val width: UInt,
     origin: Coordinate,
-    placeholder: Char,
+    placeholder: String,
     color: Color,
     ): Figure(origin, color, placeholder) {
 
@@ -18,7 +18,7 @@ class Rectangle private constructor(
     companion object {
         fun fromSize(
             heightWidth: Pair<UInt,UInt>,
-            placeholder: Char,
+            placeholder: String,
             origin: Coordinate = Coordinate(0,0),
             color: Color = Color.DEFAULT): Rectangle {
 
