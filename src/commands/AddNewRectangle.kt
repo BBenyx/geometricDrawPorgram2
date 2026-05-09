@@ -4,7 +4,7 @@ import RenderContext
 import factory.CellFactory
 import factory.RectangleFactory
 
-class AddNewRectangle(val canvas: Canvas): Command {
+class AddNewRectangle(private val canvas: Canvas): Command {
 
     override fun execute() {
         val figure = RectangleFactory.create()

@@ -4,7 +4,7 @@ import factory.CellFactory
 import factory.CircleFactory
 import RenderContext
 
-class AddNewCircle(val canvas: Canvas): Command{
+class AddNewCircle(private val canvas: Canvas): Command{
 
     override fun execute() {
         val figure = CircleFactory.create()

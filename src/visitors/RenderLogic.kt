@@ -1,9 +1,7 @@
 package visitors
 
 import Coordinate
-import RenderContext
 import figures.Circle
-import figures.Figure
 import figures.Rectangle
 import figures.Triangle
 

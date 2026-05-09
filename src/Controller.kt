@@ -1,7 +1,8 @@
 import IO.InputHandler
+import IO.OutputHandler
 
 class Controller private constructor(
-    var canvas: Canvas,
+    private var canvas: Canvas,
 ) {
     constructor(): this(Canvas(0u,0u))
 
@@ -12,7 +13,7 @@ class Controller private constructor(
         )
     }
 
-    val commandList: List<MenuItem> = listOf(
+    private val commandList: List<MenuItem> = listOf(
         MenuItem("\n0. Render") { commands.DefaultRender(canvas).execute() },
         MenuItem("1. Render in color") { commands.ColorRenderVisitor(canvas).execute() },
         MenuItem("2. Render in list") { commands.ListRender(canvas).execute() },
@@ -22,10 +23,10 @@ class Controller private constructor(
     )
 
     fun handleMenu() {
-
         for (elem in commandList) {
-            println(elem.label)
+            OutputHandler.printMessage(elem.label)
         }
+
         val input = InputHandler.intInput("Enter command number: ")
         try {
             commandList[input].action()

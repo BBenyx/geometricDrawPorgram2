@@ -5,13 +5,10 @@ import Cell
 
 class DefaultRenderVisitor(): CanvasVisitor {
     private var _grid: ArrayList<ArrayList<String>> = ArrayList()
-
     val grid: List<List<String>>
     get() = _grid
 
-
     override fun visit(canvas: Canvas) {
-
         _grid = RenderLogic.createBlankGrid(canvas.width.toInt(), canvas.height.toInt())
     }
 

@@ -3,7 +3,7 @@ import Canvas
 import IO.OutputHandler
 import visitors.DefaultRenderVisitor
 
-class DefaultRender(val canvas: Canvas): Command{
+class DefaultRender(private val canvas: Canvas): Command{
 
     override fun execute() {
         OutputHandler.printCanvas(canvas, DefaultRenderVisitor())
