@@ -1,16 +1,15 @@
 package commands
 import Canvas
-import Coordinate
-import IO.Color
-import figures.Triangle
+import RenderContext
+import factory.CellFactory
+import factory.TriangleFactory
 
-class AddNewTriangle(
-    val canvas: Canvas,
-    val points: List<Coordinate>,
-    val placeholder: String,
-    val color: Color = Color.DEFAULT,): Command {
+class AddNewTriangle(val canvas: Canvas): Command {
 
     override fun execute() {
-        canvas.addElement(Triangle.fromPoints(points, placeholder, color))
+        val figure = TriangleFactory.create()
+        val cell = CellFactory.create()
+
+        canvas.addElement(RenderContext(figure, cell))
     }
 }

@@ -1,12 +1,12 @@
 package visitors
 import Canvas
-import IO.Color
+import Cell
 import figures.*
 import figures.Rectangle
 
 interface CanvasVisitor {
     fun visit(canvas: Canvas)
-    fun visit(rectangle: Rectangle)
-    fun visit(triangle: Triangle)
-    fun visit(circle: Circle)
+    fun visit(rectangle: Rectangle, cell: Cell)
+    fun visit(triangle: Triangle, cell: Cell)
+    fun visit(circle: Circle, cell: Cell)
 }

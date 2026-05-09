@@ -1,34 +1,15 @@
 package figures
+import Cell
 import Coordinate
-import IO.Color
 import visitors.CanvasVisitor
 
-class Rectangle private constructor(
+class Rectangle(
     val height: UInt,
     val width: UInt,
     origin: Coordinate,
-    placeholder: String,
-    color: Color,
-    ): Figure(origin, color, placeholder) {
+    ): Figure(origin) {
 
-    override fun accept(visitor: CanvasVisitor) {
-        visitor.visit(this)
-    }
-
-    companion object {
-        fun fromSize(
-            heightWidth: Pair<UInt,UInt>,
-            placeholder: String,
-            origin: Coordinate = Coordinate(0,0),
-            color: Color = Color.DEFAULT): Rectangle {
-
-            return Rectangle(
-                heightWidth.first,
-                heightWidth.second,
-                origin,
-                placeholder,
-                color,
-            )
-        }
+    override fun accept(visitor: CanvasVisitor, cell: Cell) {
+        visitor.visit(this, cell)
     }
 }

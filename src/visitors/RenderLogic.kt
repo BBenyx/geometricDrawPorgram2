@@ -1,14 +1,13 @@
 package visitors
 
 import Coordinate
+import RenderContext
 import figures.Circle
 import figures.Figure
 import figures.Rectangle
 import figures.Triangle
 
-class RenderLogic {
-    companion object {
-
+object RenderLogic {
         fun createBlankGrid(
             width: Int,
             height: Int,): ArrayList<ArrayList<String>>{
@@ -27,7 +26,7 @@ class RenderLogic {
         fun drawRectangleOnGrid(
             rectangle: Rectangle,
             grid: ArrayList<ArrayList<String>>,
-            placeholderGetter: (Figure) -> String) {
+            placeholderGetter: () -> String) {
 
             if (rectangle.height == 0u || rectangle.width == 0u) { return }
             val origin = rectangle.origin
@@ -35,9 +34,9 @@ class RenderLogic {
             for (y in origin.y..<origin.y + rectangle.height.toInt()) {
                 for (x in origin.x..<origin.x + rectangle.width.toInt()) {
 
-                    val coordinate = Coordinate(x, y)
-                    val newElement = placeholderGetter(rectangle)
-                    tryToChangeElement(coordinate, newElement, grid)
+                    val reverseCoordinate = Coordinate(y, x)
+                    val newElement = placeholderGetter()
+                    tryToChangeElement(reverseCoordinate, newElement, grid)
                 }
             }
         }
@@ -45,10 +44,11 @@ class RenderLogic {
         fun drawTriangleOnGrid(
             triangle: Triangle,
             grid: ArrayList<ArrayList<String>>,
-            placeholderGetter: (Figure) -> String) {
-            val p1 = triangle.p1
-            val p2 = triangle.p2
-            val p3 = triangle.p3
+            placeholderGetter: () -> String) {
+            // Because of the 2D coordinates must be flipped
+            val p1 = Coordinate(triangle.p1.y, triangle.p1.x)
+            val p2 = Coordinate(triangle.p2.y, triangle.p2.x)
+            val p3 = Coordinate(triangle.p3.y, triangle.p3.x)
 
             val minX = minOf(p1.x, p2.x, p3.x)
             val minY = minOf(p1.y, p2.y, p3.y)
@@ -58,10 +58,10 @@ class RenderLogic {
             for (y in minY..maxY) {
                 for (x in minX..maxX) {
 
-                    val p = Coordinate(x, y)
+                    val p = Coordinate(y, x)
                     if (isPointInsideOfFigure(p, p1, p2, p3)) {
 
-                        val newElement = placeholderGetter(triangle)
+                        val newElement = placeholderGetter()
                         tryToChangeElement(p, newElement, grid)
                     }
                 }
@@ -71,9 +71,9 @@ class RenderLogic {
         fun drawCircleOnGrid(
             circle: Circle,
             grid: ArrayList<ArrayList<String>>,
-            placeholderGetter: (Figure) -> String) {
+            placeholderGetter: () -> String) {
 
-            val radius = (circle.height / 2u).toInt()
+            val radius = circle.radius.toInt()
             val center = circle.origin
 
             for (y in center.y - radius..center.y + radius) {
@@ -84,9 +84,9 @@ class RenderLogic {
 
                     if (dx * dx + dy * dy <= radius * radius) {
 
-                        val coordinate = Coordinate(x, y)
-                        val newElement = placeholderGetter(circle)
-                        tryToChangeElement(coordinate, newElement, grid)
+                        val reverseCoordinate = Coordinate(y, x)
+                        val newElement = placeholderGetter()
+                        tryToChangeElement(reverseCoordinate, newElement, grid)
                     }
                 }
             }
@@ -132,5 +132,4 @@ class RenderLogic {
 
             return !(onlyNegativeSign && onlyPositiveSign)
         }
-    }
 }

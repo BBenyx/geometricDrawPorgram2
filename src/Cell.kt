@@ -1,6 +1,4 @@
-import IO.Color
-
 data class Cell(
     val placeHolder: String,
-    val color: Color = Color.DEFAULT
+    val color: RGB = RGB(255u, 255u, 255u)
 )

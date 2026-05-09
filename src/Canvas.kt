@@ -1,24 +1,23 @@
-import figures.Figure
 import visitors.CanvasVisitor
 
 class Canvas(
     val width: UInt,
     val height: UInt,
-    private val _elements: ArrayList<Figure> = arrayListOf(),
+    private val _elements: ArrayList<RenderContext> = arrayListOf(),
 ) {
-    val elements: List<Figure>
+    val elements: List<RenderContext>
     get() = _elements
 
     fun accept(visitor: CanvasVisitor) {
         visitor.visit(this)
         for (elem in elements) {
-            elem.accept(visitor)
+            elem.figure.accept(visitor, elem.cell)
         }
     }
 
-    fun addElement(element: Figure) = _elements.add(element)
+    fun addElement(element: RenderContext) = _elements.add(element)
 
-    fun removeElement(element: Figure): Figure? {
+    fun removeElement(element: RenderContext): RenderContext? {
         if (_elements.remove(element)) return element
         return null
     }

@@ -2,6 +2,6 @@ import Controller
 
 
 fun main() {
-    val test = Controller()
-    test.handleMenu()
+    val program = Controller()
+    program.handleMenu()
 }

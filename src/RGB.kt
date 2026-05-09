@@ -1,0 +1,1 @@
+data class RGB(val r: UByte, val g: UByte, val b: UByte)

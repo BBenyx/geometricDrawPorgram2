@@ -1,32 +1,14 @@
 package figures
+import Cell
 import Coordinate
-import IO.Color
 import visitors.CanvasVisitor
 
-class Circle private constructor(
-    val height: UInt,
+class Circle(
+    val radius: UInt,
     origin: Coordinate,
-    placeholder: String,
-    color: Color,
-    ): Figure(origin, color, placeholder) {
+    ): Figure(origin) {
 
-    override fun accept(visitor: CanvasVisitor) {
-        visitor.visit(this)
-    }
-
-    companion object {
-        fun fromHeight(
-            height: UInt,
-            placeholder: String,
-            origin: Coordinate = Coordinate(0,0),
-            color: Color = Color.DEFAULT): Circle {
-
-            return Circle(
-                height,
-                origin,
-                placeholder,
-                color,
-            )
-        }
+    override fun accept(visitor: CanvasVisitor, cell: Cell) {
+        visitor.visit(this, cell)
     }
 }

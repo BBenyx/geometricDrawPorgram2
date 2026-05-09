@@ -1,17 +1,15 @@
 package commands
 import Canvas
-import Coordinate
-import IO.Color
-import figures.Circle
+import factory.CellFactory
+import factory.CircleFactory
+import RenderContext
 
-class AddNewCircle(
-    val canvas: Canvas,
-    val height: UInt,
-    val placeholder: String,
-    val origin: Coordinate = Coordinate(0, 0),
-    val color: Color = Color.DEFAULT,): Command {
+class AddNewCircle(val canvas: Canvas): Command{
 
     override fun execute() {
-        canvas.addElement(Circle.fromHeight(height, placeholder, origin, color))
+        val figure = CircleFactory.create()
+        val cell = CellFactory.create()
+
+        canvas.addElement(RenderContext(figure, cell))
     }
 }

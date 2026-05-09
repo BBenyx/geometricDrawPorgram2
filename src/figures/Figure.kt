@@ -1,12 +1,9 @@
 package figures
 import Coordinate
-import IO.Color
 import visitors.CanvasVisitor
+import Cell
 
-abstract class Figure(
-    val origin: Coordinate,
-    val color: Color,
-    val placeHolder: String,) {
+abstract class Figure(val origin: Coordinate) {
 
-    abstract fun accept(visitor: CanvasVisitor)
+    abstract fun accept(visitor: CanvasVisitor, cell: Cell)
 }

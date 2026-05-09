@@ -1,17 +1,15 @@
 package commands
 import Canvas
-import Coordinate
-import IO.Color
-import figures.Rectangle
+import RenderContext
+import factory.CellFactory
+import factory.RectangleFactory
 
-class AddNewRectangle(
-    val canvas: Canvas,
-    val heightWidth: Pair<UInt, UInt>,
-    val placeholder: String,
-    val origin: Coordinate = Coordinate(0, 0),
-    val color: Color = Color.DEFAULT,): Command {
+class AddNewRectangle(val canvas: Canvas): Command {
 
     override fun execute() {
-        canvas.addElement(Rectangle.fromSize(heightWidth, placeholder, origin, color))
+        val figure = RectangleFactory.create()
+        val cell = CellFactory.create()
+
+        canvas.addElement(RenderContext(figure, cell))
     }
 }

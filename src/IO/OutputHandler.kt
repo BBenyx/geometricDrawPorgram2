@@ -1,28 +1,27 @@
 package IO
-
 import Canvas
 import visitors.*
 
-class  OutputHandler {
+object OutputHandler {
 
-    fun printCanvas(canvas: Canvas, type: DefaultRender) {
+    fun printCanvas(canvas: Canvas, type: DefaultRenderVisitor) {
         canvas.accept(type)
         val grid = type.grid
         print2DGrid(grid)
     }
 
-    fun printCanvas(canvas: Canvas, type: ColorRender) {
+    fun printCanvas(canvas: Canvas, type: ColorRenderVisitor) {
         canvas.accept(type)
         val grid = type.grid
         print2DGrid(grid)
     }
 
-    fun printCanvas(canvas: Canvas, type: ListRender) {
+    fun printCanvas(canvas: Canvas, type: ListRenderVisitor) {
         canvas.accept(type)
-        val grid = type.grid
+        val instanceList = type.instanceInfo
 
-        for (subGrind in grid) {
-            print2DGrid(subGrind)
+        for (instance in instanceList) {
+            println(instance)
         }
     }
 
