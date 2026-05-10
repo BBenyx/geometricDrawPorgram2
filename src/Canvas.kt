@@ -16,9 +16,4 @@ class Canvas(
     }
 
     fun addElement(element: RenderContext) = _elements.add(element)
-
-    fun removeElement(element: RenderContext): RenderContext? {
-        if (_elements.remove(element)) return element
-        return null
-    }
 }

@@ -27,3 +27,4 @@ class ColorRenderVisitor(): CanvasVisitor {
 
     private fun String.color(rgb: RGB) = "\u001B[38;2;${rgb.r};${rgb.g};${rgb.b}m$this\u001B[0m"
 }
+
